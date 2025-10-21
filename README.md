@@ -68,23 +68,23 @@ for i in range(n-1):
 퀵정렬과 이분탐색을 통하여
 원하는 K까지만 빠르게 도달
 
-m = (s+e)//2 #중간을 지정
-    swap(s,m)	#중간과 시작을 스왑
-    pivot = a[s]	#피봇은 시작점
-    i = s+1		# i와 j 를 각각 끝위치
-    j = e
-    while i<= j:
-        while pivot < a[j] and j>0: j-= 1
-        while pivot > a[i] and i<len(a)-1: i+=1
-
-        if i<=j:
-            swap(i,j)
-            i+=1
-            j-=1
-            
-    a[s] = a[j]	#피봇과 j 다시 재정렬
-    a[j] = pivot
-    return j		#값 반환
+		m = (s+e)//2 #중간을 지정
+		    swap(s,m)	#중간과 시작을 스왑
+		    pivot = a[s]	#피봇은 시작점
+		    i = s+1		# i와 j 를 각각 끝위치
+		    j = e
+		    while i<= j:
+		        while pivot < a[j] and j>0: j-= 1
+		        while pivot > a[i] and i<len(a)-1: i+=1
+		
+		        if i<=j:
+		            swap(i,j)
+		            i+=1
+		            j-=1
+		            
+		    a[s] = a[j]	#피봇과 j 다시 재정렬
+		    a[j] = pivot
+		    return j		#값 반환
 
 
 -------------------------------------------------------------------------------------------
