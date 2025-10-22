@@ -1,4 +1,4 @@
-# solveAL
+=# solveAL
 문제 해결 기법 백준코드와 풀이
 004. { 구간합 구하기2 } : 31p
 
@@ -135,8 +135,8 @@ def partition(s,e):
     j = e
     print(a)
     while i<= j:
-        while pivot < a[j] and j>0: j-= 1; print("j=",j,end=" ")
-        while pivot > a[i] and i<len(a)-1: i+=1; print("i=",i," ")
+        while pivot < a[j] and j>0: j-= 1; 
+        while pivot > a[i] and i<len(a)-1: i+=1; 
 
         if i<=j:
             swap(i,j)
@@ -145,7 +145,6 @@ def partition(s,e):
             
     a[s] = a[j]
     a[j] = pivot
-    print(a,j,i)
     return j
 
 quickSort(0, n-1, m-1)
