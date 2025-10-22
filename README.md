@@ -12,11 +12,17 @@
 -------------------------------------------------------------------------------------------
 
 006. { 연속된 자연수의 합 구하기 }: 40p
+7. 
 ```
+N = int(input())
+
+sum,st,ed,cnt = 1,1,1,1	
+
 while ed != N:
     if sum == N: cnt+=1; ed+=1; sum+=ed
     elif sum > N: sum-=st; st+=1
     else : sum+=ed; ed+=1
+print(cnt)
 ```
 -------------------------------------------------------------------------------------------
 
@@ -26,7 +32,13 @@ while ed != N:
 기준값 k (배열의 순서대로 값)과 동일할때까지 i+j를 함,
 겹치면 i,j 수를 변경
 ```
-while i<j:
+n = int(input() )
+a = list(map(int, input().split()))
+cnt = 0
+for k in a:
+    find,i,j = k,0,n-1
+    
+    while i<j:
         if a[i]+a[j]== find:
             if i != k and j != k:
                 cnt+=1
@@ -37,6 +49,7 @@ while i<j:
                 j-=1
         elif a[i]+a[j] < find : i+=1
         else : j-=1
+print(cnt)   
 ```
 -------------------------------------------------------------------------------------------
 
@@ -45,13 +58,24 @@ while i<j:
 스택에 인덱스값을 넣고, 인덱스 값을 활용해 다음 들어오는 수열값이 더크면
 인덱스를 팝을 하여 저장배열에 넣는다.
 ```
+n = int(input())
+a = list(map(int, input().split()))
+ans = [0]*n
+S = []
+
 for i in range(n):
-    while S and a[S[-1]] < a[i]: #수열배열에 top이 현재 i가 가르키는 수 보다 높으면 pop
+    while S and a[S[-1]] < a[i]:
         ans[S.pop()] = a[i]
     S.append(i)
 
 while S:
     ans[S.pop()] = -1
+    
+result = ""
+
+for i in range(n):
+    result += str(ans[i])+" "
+print(result)
 ```
 
 -------------------------------------------------------------------------------------------
@@ -73,23 +97,53 @@ for i in range(n-1):
 원하는 K까지만 빠르게 도달
 
 ```
-		m = (s+e)//2 #중간을 지정
-		    swap(s,m)	#중간과 시작을 스왑
-		    pivot = a[s]	#피봇은 시작점
-		    i = s+1		# i와 j 를 각각 끝위치
-		    j = e
-		    while i<= j:
-		        while pivot < a[j] and j>0: j-= 1
-		        while pivot > a[i] and i<len(a)-1: i+=1
-		
-		        if i<=j:
-		            swap(i,j)
-		            i+=1
-		            j-=1
-		            
-		    a[s] = a[j]	#피봇과 j 다시 재정렬
-		    a[j] = pivot
-		    return j		#값 반환
+		n , m = map(int,input().split())
+a = list(map(int, input().split()))
+
+def quickSort(s,e,k):
+    global a
+    if s<e:
+        pivot = partition(s,e)
+        
+        if pivot == k: return
+        elif k < pivot: quickSort(s,pivot-1,k)
+        else: quickSort(pivot+1,e,k)
+
+def swap(i,j):
+    global a
+    tmp = a[i]
+    a[i] = a[j]
+    a[j] = tmp
+
+def partition(s,e):
+    global a
+    
+    if s+1 == e:
+        if a[s] > a[e]:
+            swap(s,e)
+    
+    m = (s+e)//2
+    swap(s,m)
+    pivot = a[s]
+    i = s+1
+    j = e
+    print(a)
+    while i<= j:
+        while pivot < a[j] and j>0: j-= 1; print("j=",j,end=" ")
+        while pivot > a[i] and i<len(a)-1: i+=1; print("i=",i," ")
+
+        if i<=j:
+            swap(i,j)
+            i+=1
+            j-=1
+            
+    a[s] = a[j]
+    a[j] = pivot
+    print(a,j,i)
+    return j
+
+quickSort(0, n-1, m-1)
+print(a[m-1])
 ```
 
 
